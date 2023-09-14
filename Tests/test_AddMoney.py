@@ -9,8 +9,8 @@ from utilities.BaseClass import BaseClass
 
 @pytest.mark.usefixtures("setup")
 class TestAddMoney(BaseClass):
-    def test_AddMoneyToWallet(self,GetData):
 
+    def test_AddMoneyToWallet(self,GetData):
         login_page = LogingDetails(self.driver)
         login_page.UserName().send_keys(GetData["mail"])
         login_page.Password().send_keys(GetData["password"])
@@ -40,6 +40,7 @@ class TestAddMoney(BaseClass):
         self.driver.find_element(By.CLASS_NAME, "mdc-checkbox__native-control").click()
         self.driver.find_element(By.XPATH, "(//button[@id='button-next'])[2]").click()
         time.sleep(1)
+
         well_done = self.driver.find_element(By.XPATH, "(//h5[normalize-space()='Well done!'])[1]").text
 
         assert "done!" in well_done
@@ -50,5 +51,9 @@ class TestAddMoney(BaseClass):
     @pytest.fixture(params=LoginDataTest.LoginData)
     def GetData(self, request):
         return request.param
-
-
+    #
+    #
+    # def screenshot_on_failure(self):
+    #     for self._testMethodName, error in self._outcome.errors:
+    #         if error:
+    #             attach(data=self.driver.get_screenshot_as_png())

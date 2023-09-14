@@ -5,7 +5,7 @@ from selenium.common import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.common.by import By
-
+import unittest
 from selenium.webdriver import ActionChains
 
 
@@ -183,13 +183,6 @@ class TestAddBeneficiary(BaseClass):
         except Exception as err:
             log.info(err)
 
-    def tearDown(self):
-            self.screenshot_on_failure()
-
-    def screenshot_on_failure(self):
-        for self._testMethodName, error in self._outcome.errors:
-            if error:
-                attach(data=self.driver.get_screenshot_as_png())
 
 
 
