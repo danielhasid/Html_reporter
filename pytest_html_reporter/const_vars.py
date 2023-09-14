@@ -66,7 +66,7 @@ class ConfigVars:
     _suite_error = 0
     _suite_fail = 0
     _pvalue = 0
-    screen_base = ''
+    screen_base = 'C:/Users/DanielHasid/PycharmProjects/Okoora/Tests/pytest_screenshots'
     screen_img = None
     _attach_screenshot_details = ''
     _title = 'REGRASSION REPORT'
