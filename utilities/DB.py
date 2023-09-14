@@ -38,3 +38,26 @@ class TestDeleteUser(BaseClass):
             return error
         finally:
             cursor.close()
+
+
+    def deletePayer(self,request):
+        cursor = self.conn.cursor()
+        sql = "delete from Payers where SetupProfileId = '" + str(request) + "'"
+        try:
+            rows = cursor.execute(sql)
+            return rows
+        except pyodbc as error:
+            return error
+        finally:
+            cursor.close()
+
+    def existPayer(self,request):
+        cursor = self.conn.cursor()
+        sql = "select count(*) from Payers where SetupProfileId = '" + str(request) + "'"
+        try:
+            rows = cursor.execute(sql)
+            return rows
+        except pyodbc as error:
+            return error
+        finally:
+            cursor.close()

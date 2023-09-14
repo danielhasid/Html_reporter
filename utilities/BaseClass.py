@@ -1,3 +1,7 @@
+import unittest
+import glob
+import os
+import shutil
 from pytest_html_reporter import attach
 import inspect
 import logging
@@ -8,7 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 
-
+@pytest.mark.usefixtures("movePicture")
 @pytest.mark.usefixtures("setup")
 class BaseClass:
 
@@ -20,16 +24,13 @@ class BaseClass:
     def ReformatCurrency(self,currency):
        return re.sub('[$₪,]', "", currency)
 
-    def screenshot_on_failure(self):
-        for self._testMethodName, error in self._outcome.errors:
-            if error:
-                attach(data=self.driver.get_screenshot_as_png())
 
     def WaitUntilClickable(self,element):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(element))
 
     def WaitUntilPageLoaded(self,element):
         WebDriverWait(self.deiver, 10).until(EC.presence_of_element_located(element))
+
 
     def get_Logger(self):
         now = datetime.datetime.now()
@@ -41,14 +42,15 @@ class BaseClass:
         formatter = logging.Formatter('%(asctime)s %(levelname)s : %(name)-s :%(message)s')
         FileHandler.setFormatter(formatter)
         logger.setLevel(logging.INFO)
-
         return logger
+
 
 
 
     def todayAt(self,hr, min=0, sec=0, micros=0):
         now = datetime.datetime.now()
         return now.replace(hour=hr, minute=min, second=sec, microsecond=micros)
+
 
 
 
